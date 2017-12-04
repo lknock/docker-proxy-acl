@@ -53,11 +53,36 @@ func main() {
 		containers.HandleFunc("/json", upstream.Pass());
 		containers.HandleFunc("/{name}/json", upstream.Pass());
 	}
+	
+	if allowedMap["images"] {
+		fmt.Printf("Registering image handlers\n");
+		containers := m.PathPrefix("/images").Subrouter();
+		containers.HandleFunc("/json", upstream.Pass());
+		containers.HandleFunc("/{name}/json", upstream.Pass());
+	}
 
 	if allowedMap["networks"] {
-		fmt.Printf("Registering networks handlers\n");
+		fmt.Printf("Registering network handlers\n");
 		m.HandleFunc("/networks", upstream.Pass());
 		m.HandleFunc("/networks/{name}", upstream.Pass());
+	}
+	
+	if allowedMap["services"] {
+		fmt.Printf("Registering service handlers\n");
+		m.HandleFunc("/services", upstream.Pass());
+		m.HandleFunc("/services/{name}", upstream.Pass());
+	}
+	
+	if allowedMap["tasks"] {
+		fmt.Printf("Registering task handlers\n");
+		m.HandleFunc("/tasks", upstream.Pass());
+		m.HandleFunc("/tasks/{name}", upstream.Pass());
+	}
+	
+	if allowedMap["volumes"] {
+		fmt.Printf("Registering volume handlers\n");
+		m.HandleFunc("/volumes", upstream.Pass());
+		m.HandleFunc("/volumes/{name}", upstream.Pass());
 	}
 
 	if allowedMap["version"] {
@@ -74,7 +99,6 @@ func main() {
 		fmt.Printf("Registering ping handlers\n");
 		m.HandleFunc("/_ping", upstream.Pass());
 	}
-
 
 	http.Handle("/", m);
 
