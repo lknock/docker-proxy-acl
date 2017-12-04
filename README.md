@@ -9,8 +9,12 @@ to do from inside the container, the requests can be limited to specific endpoin
 
 You can enable an endpoint with the `-a` argument. Currently supported endpoints are:
 
-* containers: opens access to `/containers/json` and `/containers/{name}/json`.
+* containers: opens access to `/containers/json` and `/containers/{name}/json`
+* images: opens access to `/images/json` and `/images/{name}/json`
 * networks: opens access to `/networks` and `/networks/{name}`
+* services: opens access to `/services` and `/services/{name}`
+* tasks: opens access to `/tasks` and `/tasks/{name}`
+* volumes: opens access to `/volumes` and `/volumes/{name}`
 * info: opens access to `/info`
 * version: opens access to `/version`
 * ping: opens access to `/_ping`
@@ -63,4 +67,4 @@ endponts like `/containters/{name}/json` it will just forward all the response a
 ## TODO
 
 * extend with more ACL rules for other uses/endpoints
-
+* support read-only endpoints
