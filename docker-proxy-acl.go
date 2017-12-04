@@ -56,9 +56,9 @@ func main() {
 	
 	if allowedMap["images"] {
 		fmt.Printf("Registering image handlers\n");
-		containers := m.PathPrefix("/images").Subrouter();
-		containers.HandleFunc("/json", upstream.Pass());
-		containers.HandleFunc("/{name}/json", upstream.Pass());
+		images := m.PathPrefix("/images").Subrouter();
+		images.HandleFunc("/json", upstream.Pass());
+		images.HandleFunc("/{name}/json", upstream.Pass());
 	}
 
 	if allowedMap["networks"] {
